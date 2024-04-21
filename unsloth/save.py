@@ -923,9 +923,11 @@ def save_to_gguf(
           "This will take 3 minutes...")
 
     if use_fast_convert:
-        command = f"python llama.cpp/convert.py {model_directory} "\
-            f"--outfile {final_location} --vocab-type hfft "\
+        command = (
+            f"python llama.cpp/convert.py {model_directory} "
+            f"--outfile {final_location} --vocab-type bpe "
             f"--outtype {first_conversion} --concurrency {n_cpus}"
+        )
     else:
         # Need to fix convert-hf-to-gguf.py for some models!
         _fix_gemma_gguf()
